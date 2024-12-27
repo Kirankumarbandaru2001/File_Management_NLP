@@ -113,3 +113,4 @@ eval_type_backport~=0.2.2
 unstructured-client~=0.28.1
 python-iso639~=2024.10.22
 aiofiles~=24.1.0
+unstructured[pdf]
