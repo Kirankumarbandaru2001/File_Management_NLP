@@ -30,7 +30,7 @@ async def create_document(title:str,file: UploadFile=File(...),db:Session=Depend
         # save the file locally temporarily
         temp_file_path = f"/tmp/{file.filename}"
         with open(temp_file_path,"wb") as temp_file:
-            temp_file.write(await file.read())
+            temp_file.write(file_content)
 
         # Parse document
         parsed_data = parse_document(temp_file_path)
