@@ -1,7 +1,10 @@
 from fastapi import FastAPI
-from app.routes.routes import router
+from app.routes.document import router
+from app.db.connection import engine
+from app.db.models.document import Document
 
-
+# Create tables in the database
+Document.metadata.create_all(bind=engine)
 app = FastAPI(title="Document Manager", version="1.0.0")
 
 # Register routes

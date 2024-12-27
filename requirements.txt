@@ -31,7 +31,9 @@ joblib==1.4.2
 jsonpatch==1.33
 jsonpointer==3.0.0
 langchain==0.3.13
+langchain-community~=0.3.13
 langchain-core==0.3.28
+langchain-openai==0.2.14
 langchain-text-splitters==0.3.4
 langsmith==0.2.6
 llama-cloud==0.1.7
@@ -68,9 +70,11 @@ pypdf==5.1.0
 python-dateutil==2.9.0.post0
 python-dotenv==1.0.0
 python-magic~=0.4.27
-python-multipart==0.0.6
+python-multipart==0.0.18
 pytz==2024.2
 PyYAML==6.0.2
+redis
+sentence-transformers
 regex==2024.11.6
 requests==2.32.3
 requests-toolbelt==1.0.0
@@ -114,3 +118,8 @@ unstructured-client~=0.28.1
 python-iso639~=2024.10.22
 aiofiles~=24.1.0
 unstructured[pdf]
+
+Booktype~=1.5
+setuptools~=75.6.0
+simplejson~=3.19.3
+pydantic-settings~=2.7.0

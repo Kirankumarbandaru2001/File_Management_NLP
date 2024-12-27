@@ -9,3 +9,5 @@ AWS_SECRET_ACCESS_KEY = os.getenv("AWS_SECRET_ACCESS_KEY")
 S3_BUCKET_NAME = os.getenv("S3_BUCKET_NAME")
 DATABASE_URL = os.getenv("DATABASE_URL")
 # DATABASE_URL = "postgresql://doc_user:doc_password@localhost/document_manager"
+REDIS_HOST = os.getenv("REDIS_HOST", "localhost")
+REDIS_PORT = int(os.getenv("REDIS_PORT", 6379))
