@@ -1,61 +1,26 @@
 version: '3.8'
-
 services:
-  backend:
-    build: .
-    container_name: document-manager-backend
+  api:
+    build: ./backend
     ports:
-      - "8000:8000"  # Exposes FastAPI app on port 8000
-    environment:
-      - DATABASE_URL=${DATABASE_URL}  # Uses environment variable from .env
-      - REDIS_URL=${REDIS_URL}  # If using Redis (add to .env if needed)
-      - S3_BUCKET_NAME=${S3_BUCKET_NAME}  # Uses environment variable from .env
-      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}  # Uses AWS Access Key from .env
-      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}  # Uses AWS Secret Key from .env
-      - SECRET_KEY=${SECRET_KEY}  # Set this securely in .env as well
-    volumes:
-      - .:/app
+      - "8000:8000"
+    env_file:
+      - .env
     depends_on:
       - db
-      - redis
     networks:
-      - backend_network
-
+      - backend_app_network
   db:
-    image: postgres:13
-    container_name: document-manager-db
+    image: postgres:14
     environment:
-      POSTGRES_USER: ${POSTGRES_USER}  # Use this securely in .env
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}  # Use this securely in .env
-      POSTGRES_DB: ${POSTGRES_DB}  # Use this securely in .env
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-    networks:
-      - backend_network
-
-  redis:
-    image: redis:alpine
-    container_name: document-manager-redis
-    networks:
-      - backend_network
-
-  frontend:
-    build:
-      context: ./frontend
-    container_name: document-manager-frontend
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: document_manager
     ports:
-      - "3000:3000"  # Exposes React app on port 3000
-    depends_on:
-      - backend
+      - "5432:5432"
     networks:
-      - frontend_network
+      - backend_app_network
 
 networks:
-  backend_network:
+  backend_app_network:
     driver: bridge
-  frontend_network:
-    driver: bridge
-
-volumes:
-  postgres_data:
-    driver: local
