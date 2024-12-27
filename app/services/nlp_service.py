@@ -1,3 +1,5 @@
+from importlib.metadata import metadata
+
 from unstructured.partition.auto import partition
 
 def parse_document(file_path:str):
@@ -9,8 +11,15 @@ def parse_document(file_path:str):
         dict: Parsed text and metadata.
     """
     try:
+        # Using unstructured to parse the document
         elements = partition(filename = file_path)
         text = " ".join([element.text for element in elements if hasattr(element, 'text')])
-        return {"text":text, "metadata":{}}
+
+        metadata = {
+            "number_of_elements": len(elements),
+            "file_path": file_path
+        }
+
+        return {"text":text, "metadata":metadata}
     except Exception as e:
         raise RuntimeError(f"Error parsing document:{str(e)}")
